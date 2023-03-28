@@ -1,11 +1,14 @@
 import "@styles/style.scss";
 import Home from "@pages/Home";
+import { StudentProvider } from "./context/StudentProvider";
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <StudentProvider>
+      <div className="App">
+        <Home />
+      </div>
+    </StudentProvider>
   );
 }
 
