@@ -6,16 +6,16 @@ export const setStudent = (student) => {
   };
 };
 
-export const deleteStudent = (students) => {
+export const deleteStudent = (studentId) => {
   return {
     type: actionTypes.DELETE_STUDENT,
-    payload: students,
+    payload: studentId,
   };
 };
 
-export const editStudent = (students) => {
+export const editStudent = (student) => {
   return {
     type: actionTypes.EDIT_STUDENT,
-    payload: students,
+    payload: student,
   };
 };

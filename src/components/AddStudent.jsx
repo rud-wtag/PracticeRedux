@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "./ui/Button";
 import Students from "@components/students";
-import { useSelector } from "react-redux";
-
+import { setStudent } from "@redux/actions/StudentAction";
 export default function AddStudent() {
-  const students = useSelector(state => state.AllStudent)
-  console.log(students)
+  const students = useSelector((state) => state.AllStudent.students);
+  const dispatch = useDispatch();
   const [name, setName] = useState();
   const AddStudent = (e) => {
     e.preventDefault();
-    setStudent([...students, { name: name }]);
+    dispatch(setStudent({ name: name }));
   };
   return (
     <div className="add-student">
@@ -25,7 +25,7 @@ export default function AddStudent() {
       >
         Add Student
       </Button>
-      {/* <Students /> */}
+      <Students />
     </div>
   );
 }
