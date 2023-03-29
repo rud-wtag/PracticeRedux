@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
 import Button from "./ui/Button";
-import { StudentContext } from "@context/StudentProvider";
 import Students from "@components/students";
+import { useSelector } from "react-redux";
 
 export default function AddStudent() {
-  const [students, setStudent] = useContext(StudentContext);
+  const students = useSelector(state => state.AllStudent)
+  console.log(students)
   const [name, setName] = useState();
-  console.log(name);
   const AddStudent = (e) => {
     e.preventDefault();
     setStudent([...students, { name: name }]);
@@ -25,7 +25,7 @@ export default function AddStudent() {
       >
         Add Student
       </Button>
-      <Students />
+      {/* <Students /> */}
     </div>
   );
 }
