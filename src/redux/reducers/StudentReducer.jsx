@@ -1,4 +1,5 @@
 const initialState = {
+  lastId: 3,
   students: [
     {
       id: 1,
@@ -19,14 +20,30 @@ const initialState = {
 };
 export const studentReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "ADD_STUDENT":
-      return action.student;
-    case "UPDATE_STUDENT":
-      return action.student;
+    case "SET_STUDENT":
+      return {
+        ...state,
+        lastId: state.lastId + 1,
+        students: [
+          ...state.students,
+          { id: state.lastId + 1, ...action.payload },
+        ],
+      };
     case "DELETE_STUDENT":
-      return action.student;
+      const filteredStudents = state.students.filter(
+        (student) => student.id !== action.payload
+      );
+      return { ...state, students: filteredStudents };
     case "EDIT_STUDENT":
-      return action.student;
+      const updated = state.students.map((student) => {
+        if (student.id === action.payload.id)
+          return { ...student, ...action.payload };
+        return student;
+      });
+      return {
+        ...state,
+        students: updated,
+      };
     default:
       return state;
   }

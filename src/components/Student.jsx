@@ -1,17 +1,20 @@
 import React, { useContext, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "@components/ui/Button";
-import { StudentContext } from "@context/StudentProvider";
+import {
+  editStudent as editStudentAction,
+  deleteStudent,
+} from "../redux/actions/StudentAction";
 
 function Student({ name, age, studentId }) {
-  const [students, setStudent] = useContext(StudentContext);
+  const students = useSelector((state) => state.AllStudent.students);
+  const dispatch = useDispatch();
+
   const [edit, setEdit] = useState(false);
   const [editedName, setName] = useState(name);
   const removeStudent = (e) => {
     e.preventDefault();
-    const filteredStudents = students.filter(
-      (student, index) => index !== studentId
-    );
-    setStudent(filteredStudents);
+    dispatch(deleteStudent(studentId));
   };
   const editStudent = (e) => {
     e.preventDefault();
@@ -23,16 +26,7 @@ function Student({ name, age, studentId }) {
   };
   const submitHandler = (e) => {
     e.preventDefault();
-    const updatedStudents = students.map((student, index) => {
-      if (index === studentId) {
-        return {
-          ...student,
-          name: editedName,
-        };
-      }
-      return student;
-    });
-    setStudent(updatedStudents);
+    dispatch(editStudentAction({ id: studentId, name: editedName }));
     setEdit(false);
   };
   return (
