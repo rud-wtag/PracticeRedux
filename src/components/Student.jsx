@@ -6,7 +6,7 @@ import {
   deleteStudent,
 } from "../redux/actions/StudentAction";
 
-function Student({ name, age, studentId }) {
+function Student({ name, grade, studentId }) {
   const students = useSelector((state) => state.AllStudent.students);
   const dispatch = useDispatch();
 
@@ -32,12 +32,12 @@ function Student({ name, age, studentId }) {
   return (
     <div className="student">
       <div className="student__left">
-        {!edit ? (
+       <strong>Name:</strong>  {!edit ? (
           <h3 className="student__name">{name}</h3>
         ) : (
           <input type="text" value={editedName} onChange={handleChange} />
         )}
-        <p className="student__name">{age}</p>
+        <strong>grade:</strong> <p className="student__name">{grade}</p>
       </div>
       <div className="student__right">
         {edit && (
