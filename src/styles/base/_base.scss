@@ -32,4 +32,8 @@ html {
 body {
   box-sizing: border-box;
   font-size: $default-font;
+  background-image: linear-gradient(to right top, #217b8d, #009191, #1ca685, #5fb76c, #9fc34f);
+  height: 100vh;
+  width: 100vw;
+
 }

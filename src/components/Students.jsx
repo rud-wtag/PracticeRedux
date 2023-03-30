@@ -7,11 +7,11 @@ function Students() {
   const students = useSelector((state) => state.AllStudent.students);
   console.log(students);
   return (
-    <>
+    <div className="students">
       {students.map((student, index) => (
-        <Student key={student.id} name={student.name} studentId={student.id} />
+        <Student key={student.id} name={student.name} grade={student?.grade} studentId={student.id} />
       ))}
-    </>
+    </div>
   );
 }
 

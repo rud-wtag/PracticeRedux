@@ -4,7 +4,6 @@ import Button from "./ui/Button";
 import Students from "@components/students";
 import { setStudent } from "@redux/actions/StudentAction";
 export default function AddStudent() {
-  const students = useSelector((state) => state.AllStudent.students);
   const dispatch = useDispatch();
   const [name, setName] = useState();
   const AddStudent = (e) => {
@@ -13,19 +12,21 @@ export default function AddStudent() {
   };
   return (
     <div className="add-student">
-      <input
-        onChange={(e) => setName(e.target.value)}
-        type="text"
-        className="add-student__input"
-      />
-      <Button
-        onClick={(e) => AddStudent(e)}
-        variant="primary"
-        className="add-student__btn"
-      >
-        Add Student
-      </Button>
-      <Students />
+      <h1>Add Student</h1>
+      <form>
+        <input
+          onChange={(e) => setName(e.target.value)}
+          type="text"
+          className="add-student__input"
+        />
+        <Button
+          onClick={(e) => AddStudent(e)}
+          variant="primary"
+          className="add-student__btn"
+        >
+          Add Student
+        </Button>
+      </form>
     </div>
   );
 }
