@@ -1,29 +1,31 @@
-import React, { useContext, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Button from "@components/ui/Button";
 import {
   editStudent as editStudentAction,
   deleteStudent,
-} from "../redux/actions/StudentAction";
+} from "@redux/actions/StudentAction";
 
 function Student({ name, grade, studentId }) {
-  const students = useSelector((state) => state.AllStudent.students);
   const dispatch = useDispatch();
-
   const [edit, setEdit] = useState(false);
   const [editedName, setName] = useState(name);
+
   const removeStudent = (e) => {
     e.preventDefault();
     dispatch(deleteStudent(studentId));
   };
+
   const editStudent = (e) => {
     e.preventDefault();
     setEdit((prevState) => !prevState);
   };
+
   const handleChange = (e) => {
     e.preventDefault();
     setName(e.target.value);
   };
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(editStudentAction({ id: studentId, name: editedName }));
@@ -32,7 +34,8 @@ function Student({ name, grade, studentId }) {
   return (
     <div className="student">
       <div className="student__left">
-       <strong>Name:</strong>  {!edit ? (
+        <strong>Name:</strong>{" "}
+        {!edit ? (
           <h3 className="student__name">{name}</h3>
         ) : (
           <input type="text" value={editedName} onChange={handleChange} />
