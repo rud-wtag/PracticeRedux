@@ -1,49 +1,46 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Button from "@components/ui/Button";
-import { StudentContext } from "@context/StudentProvider";
+import {
+  editStudent as editStudentAction,
+  deleteStudent,
+} from "@redux/actions/StudentAction";
 
-function Student({ name, age, studentId }) {
-  const [students, setStudent] = useContext(StudentContext);
+function Student({ name, grade, studentId }) {
+  const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [editedName, setName] = useState(name);
+
   const removeStudent = (e) => {
     e.preventDefault();
-    const filteredStudents = students.filter(
-      (student, index) => index !== studentId
-    );
-    setStudent(filteredStudents);
+    dispatch(deleteStudent(studentId));
   };
+
   const editStudent = (e) => {
     e.preventDefault();
     setEdit((prevState) => !prevState);
   };
+
   const handleChange = (e) => {
     e.preventDefault();
     setName(e.target.value);
   };
+
   const submitHandler = (e) => {
     e.preventDefault();
-    const updatedStudents = students.map((student, index) => {
-      if (index === studentId) {
-        return {
-          ...student,
-          name: editedName,
-        };
-      }
-      return student;
-    });
-    setStudent(updatedStudents);
+    dispatch(editStudentAction({ id: studentId, name: editedName }));
     setEdit(false);
   };
   return (
     <div className="student">
       <div className="student__left">
+        <strong>Name:</strong>{" "}
         {!edit ? (
           <h3 className="student__name">{name}</h3>
         ) : (
           <input type="text" value={editedName} onChange={handleChange} />
         )}
-        <p className="student__name">{age}</p>
+        <strong>grade:</strong> <p className="student__name">{grade}</p>
       </div>
       <div className="student__right">
         {edit && (
