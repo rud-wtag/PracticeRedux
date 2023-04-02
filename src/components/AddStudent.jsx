@@ -6,11 +6,12 @@ import Students from "@components/students";
 export default function AddStudent() {
   const [students, setStudent] = useContext(StudentContext);
   const [name, setName] = useState();
-  console.log(name);
+
   const AddStudent = (e) => {
     e.preventDefault();
     setStudent([...students, { name: name }]);
   };
+  
   return (
     <div className="add-student">
       <input

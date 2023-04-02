@@ -3,7 +3,7 @@ import Student from "./Student";
 import { StudentContext } from "../context/StudentProvider";
 
 function Students() {
-  const [students, setStudent] = useContext(StudentContext);
+  const [students] = useContext(StudentContext);
   console.log(students);
   return (
     <>
